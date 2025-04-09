@@ -7,5 +7,5 @@ import Models.PhonesModel;
 import java.sql.SQLException;
 
 public interface InsertionInterface {
-    public void Insertion() throws SQLException;
+    public boolean Insertion() throws SQLException;
 }

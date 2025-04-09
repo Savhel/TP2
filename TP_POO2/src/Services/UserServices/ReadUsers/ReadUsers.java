@@ -67,4 +67,18 @@ public class ReadUsers {
             throw new Exception("Erreur lors de l'authentification: " + e.getMessage());
         }
     }
+    public String getUser(String id) throws Exception {
+        String sql = "SELECT * FROM Users WHERE id_user = ?";
+        System.out.println(sql);
+        try (Connection connection = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement pst = connection.prepareStatement(sql)) {
+            pst.setInt(1, Integer.parseInt(id));
+            System.out.println(ResultSetToJson.usersResultSetToJson(pst.executeQuery()));
+            return ResultSetToJson.usersResultSetToJson(pst.executeQuery());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Erreur lors de l'authentification: " + e.getMessage());
+        }
+    }
 }

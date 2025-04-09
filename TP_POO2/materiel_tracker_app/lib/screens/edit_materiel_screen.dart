@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../models/models.dart';
 import '../services/materiel_service.dart';
+import '../services/storage_service.dart';
 
 class EditMaterielScreen extends StatefulWidget {
   final String materielType; // 'phone' ou 'equipment'
@@ -105,6 +106,14 @@ class _EditMaterielScreenState extends State<EditMaterielScreen> {
     });
 
     try {
+      if (_imageFile != null) {
+        try {
+          _imageUrl = await StorageService.uploadImage(_imageFile!);
+        } catch (e) {
+          print('Erreur lors du téléchargement de l\'image: $e');
+          _imageUrl = null;
+        }
+      } 
       final updatedImageUrl = _imageFile != null 
           ? 'https://example.com/images/updated_placeholder.jpg' 
           : _imageUrl;
@@ -119,7 +128,7 @@ class _EditMaterielScreenState extends State<EditMaterielScreen> {
           numeroSerie: _numeroSerieController.text,
           idProprietaire: widget.materiel.idProprietaire,
           couleur: _couleurController.text,
-          etatMateriel: widget.materiel.etatMateriel, // Conserver l'état actuel
+          etatMateriel: widget.materiel.etatMateriel, 
           imei: _imeiController.text,
           photoUrl: updatedImageUrl,
         );

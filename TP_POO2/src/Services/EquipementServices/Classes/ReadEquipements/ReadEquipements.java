@@ -2,15 +2,15 @@ package Services.EquipementServices.Classes.ReadEquipements;
 
 import Models.EquipementsModel;
 import Services.DatabaseServices.DatabaseConnection;
+import Services.EquipementServices.Interfaces.ReadInterfaces.ReadByMac;
 import Services.EquipementServices.Interfaces.ReadInterfaces.ReadInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class ReadEquipements implements ReadInterface {
+public class ReadEquipements implements ReadInterface, ReadByMac {
     private EquipementsModel equipement;
 
     public ReadEquipements(EquipementsModel equipement) {
@@ -18,39 +18,33 @@ public class ReadEquipements implements ReadInterface {
     }
 
     @Override
-    public ArrayList<EquipementsModel> read(Integer id) throws Exception {
-        ArrayList<EquipementsModel> equipements = new ArrayList<>();
-        String sql = "SELECT * FROM Agents WHERE Code = ?";
-
-        try (Connection connection = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pst = connection.prepareStatement(sql);
-            ) {
-            
-            pst.setString(1, equipement.getAddress_MAC());
-
-            // Exécution de la requête
-            try (ResultSet rsl = pst.executeQuery()) {
-                // Parcours des résultats et création des objets EquipementsModel
-                while (rsl.next()) {
-                    EquipementsModel equipementsModel = new EquipementsModel();
-                    equipementsModel.setAddress_MAC(rsl.getString("address_MAC"));
-                    equipementsModel.setNom(rsl.getString("nom"));
-                    equipementsModel.setModele(rsl.getString("Modele"));
-                    equipementsModel.setMemoire_ROM(rsl.getInt("Memoire_ROM"));
-                    equipementsModel.setMemoire_RAM(rsl.getInt("Memoire_RAM"));
-                    equipementsModel.setNumero_serie(rsl.getString("Memoire_serie"));
-                    equipementsModel.setIdPropretaire(rsl.getInt("IdPropiétaire"));
-                    equipementsModel.setCouleur(rsl.getString("Couleur"));
-                    equipementsModel.setEtat_Materiel(rsl.getString("Etat_Matériel"));
-
-                    equipements.add(equipementsModel); // Ajouter l'objet à la liste
-                }
-            }
+    public ResultSet read(Integer id) throws Exception {
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            String query = "SELECT * FROM Equipements WHERE IdProprietaire = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            return pstmt.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("Erreur lors de la lecture des équipements: " + e.getMessage());
+            // Fermer la connexion en cas d'erreur
+            if (conn != null) conn.close();
+            throw e;
         }
-
-        return equipements;
     }
+
+    public ResultSet getByMAC() throws SQLException {
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            String query = "SELECT * FROM Equipements WHERE address_MAC = ? AND etat_Materiel = 'vole'";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, equipement.getAddress_MAC());
+            // Note: La connexion sera fermée par l'appelant
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            // Fermer la connexion en cas d'erreur
+            if (conn != null) conn.close();
+            throw e;
+        }
+    }
+
 }

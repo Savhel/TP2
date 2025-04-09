@@ -18,21 +18,25 @@ public class InsertionPhones implements InsertionInterface {
     }
 
     @Override
-    public void Insertion() throws SQLException {
-            String requete="insert into Phones(IMEI,IdProprietaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie) VALUES (?,?,?,?,?,?,?,?)";
-            try (Connection connection = DatabaseConnection.getInstance().getConnection();
-                 PreparedStatement stmt = connection.prepareStatement(requete)) {
-                stmt.setString(1,phone.getIMEI());
-                stmt.setInt(2,phone.getIdProprietaire());
-                stmt.setString(3,phone.getEtat_Materiel());
-                stmt.setString(4,phone.getCouleur());
-                stmt.setString(5,phone.getNom());
-                stmt.setString(6,phone.getMarque());
-                stmt.setString(7, phone.getModele());
-                stmt.setFloat(8,phone.getMemoire_ROM());
-                stmt.setFloat(9,phone.getMemoire_RAM());
-                stmt.executeUpdate();
-            } catch (SQLException e) {
+    public boolean Insertion() throws SQLException {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
+            String query = "INSERT INTO Phones (IMEI, IdProprietaire, etat_Materiel, Couleur, Nom, Marque, Modele, memoire_ROM, memoire_RAM, numero_serie, photoUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, phone.getIMEI());
+            pstmt.setInt(2, phone.getIdProprietaire());
+            pstmt.setString(3, phone.getEtat_Materiel());
+            pstmt.setString(4, phone.getCouleur());
+            pstmt.setString(5, phone.getNom());
+            pstmt.setString(6, phone.getMarque());
+            pstmt.setString(7, phone.getModele());
+            pstmt.setFloat(8, phone.getMemoire_ROM());
+            pstmt.setFloat(9, phone.getMemoire_RAM());
+            pstmt.setString(10, phone.getNumero_serie());
+            pstmt.setString(11, phone.getPhotoUrl());
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
             }

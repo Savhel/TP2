@@ -54,17 +54,4 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) throws SQLException {
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        String query = "SELECT * FROM Phones WHERE IMEI = ?";
-        PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, "45123");
-//        System.out.println("emie: " );
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            System.out.println("emie: " + rs.getString("nom"));
-        }
-    }
 }

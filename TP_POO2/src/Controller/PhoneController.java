@@ -1,6 +1,11 @@
 package Controller;
 
 import Models.PhonesModel;
+import Services.EquipementServices.Classes.DeletePhones.DeletePhones;
+import Services.EquipementServices.Classes.InsertionPhones.InsertionPhones;
+import Services.EquipementServices.Classes.ReadPhones.ReadPhones;
+import Services.EquipementServices.Classes.UpdatePhones.UpdatePhones;
+import Services.EquipementServices.Classes.UpdatePhonesState.UpdatePhonesState;
 import Services.Utils.ResultSetToJson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -49,7 +54,7 @@ public class PhoneController {
                 }
                 
                 // Insérer le téléphone dans la base de données
-                boolean success = phone.save();
+                boolean success = new InsertionPhones(phone).Insertion();
                 
                 if (success) {
                     // Créer une réponse JSON avec les données du téléphone
@@ -79,7 +84,7 @@ public class PhoneController {
         if ("GET".equals(exchange.getRequestMethod())) {
             try {
                 PhonesModel phoneModel = new PhonesModel();
-                ResultSet phones = phoneModel.getAll(id);
+                ResultSet phones = new ReadPhones(phoneModel).read(id);
                 
                 String jsonResponse = ResultSetToJson.phonesResultSetToJson(phones);
                 sendResponse(exchange, 200, jsonResponse);
@@ -101,7 +106,7 @@ public class PhoneController {
                 System.out.println(exchange.getRequestURI().getPath());
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei.split("=")[1]);
-                ResultSet phone = phoneModel.getByIMEI();
+                ResultSet phone = new ReadPhones(phoneModel).getByIMEI();
                 
                 String jsonResponse = ResultSetToJson.phonesResultSetToJson(phone);
 
@@ -128,7 +133,7 @@ public class PhoneController {
                 
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei);
-                ResultSet phone = phoneModel.getByIMEI();
+                ResultSet phone =  new ReadPhones(phoneModel).getByIMEI();
 
                 
                 String jsonResponse = ResultSetToJson.phonesResultSetToJson(phone);
@@ -174,7 +179,7 @@ public class PhoneController {
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei);
                 phoneModel.setEtat_Materiel(newStatus);
-                boolean success = phoneModel.updateStatus();
+                boolean success = new UpdatePhonesState(phoneModel).UpdateState();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Statut du téléphone mis à jour avec succès\"}");
@@ -225,7 +230,7 @@ public class PhoneController {
                     }
                 }
                 
-                boolean success = phone.update();
+                boolean success = new UpdatePhones(phone).UpdateMaterial();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Téléphone mis à jour avec succès\"}");
@@ -250,7 +255,7 @@ public class PhoneController {
                 
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei);
-                boolean success = phoneModel.delete();
+                boolean success = new DeletePhones(phoneModel).delete();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Téléphone supprimé avec succès\"}");

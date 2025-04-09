@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../models/models.dart';
 import '../services/materiel_service.dart';
+import '../services/storage_service.dart';
 
 class AddMaterielScreen extends StatefulWidget {
   final int? userId;
@@ -17,7 +18,7 @@ class _AddMaterielScreenState extends State<AddMaterielScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   String? _errorMessage;
-  String _materielType = 'phone';
+  String _materielType = 'phone'; // 'phone' ou 'equipment'
   File? _imageFile;
   String? _imageUrl;
 
@@ -68,7 +69,15 @@ class _AddMaterielScreenState extends State<AddMaterielScreen> {
     });
 
     try {
-      _imageUrl = _imageFile != null ? 'https://example.com/images/placeholder.jpg' : null;
+      // Télécharger l'image si elle existe
+      if (_imageFile != null) {
+        try {
+          _imageUrl = await StorageService.uploadImage(_imageFile!);
+        } catch (e) {
+          print('Erreur lors du téléchargement de l\'image: $e');
+          _imageUrl = null;
+        }
+      }
 
       if (_materielType == 'phone') {
         final phone = Phone(
@@ -80,7 +89,7 @@ class _AddMaterielScreenState extends State<AddMaterielScreen> {
           numeroSerie: _numeroSerieController.text,
           idProprietaire: widget.userId,
           couleur: _couleurController.text,
-          etatMateriel: 'normal', // État par défaut
+          etatMateriel: 'normal', 
           imei: _imeiController.text,
           photoUrl: _imageUrl,
         );

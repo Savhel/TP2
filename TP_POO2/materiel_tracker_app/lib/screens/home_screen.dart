@@ -178,6 +178,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => MaterielDetailScreen(
+                    id: type == 'equipement'? materiel.addressMAC : materiel.imei,
+                    isHisPhone: materiel.idProprietaire == _currentUser?.id,
+                    idProprietaire: materiel.idProprietaire,
+                    userId: _currentUser?.id,
                     materielType: type,
                     materiel: materiel,
                   ),

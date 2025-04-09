@@ -108,4 +108,35 @@ class UserService {
       return null;
     }
   }
+
+  static Future<User?> getUser(int id) async {
+    try {
+      final Map<String, String> body = {
+        'id': id.toString(),
+      };
+
+      final response = await ApiService.post('/getUser', body);
+      
+      // Traiter différents formats de réponse possibles
+      if (response is List && response.isNotEmpty) {
+        // Si la réponse est une liste, prendre le premier élément
+        return User.fromJson(response[0]);
+      } else if (response is Map<String, dynamic>) {
+        // Si la réponse est un objet JSON
+        if (response.containsKey('error') || response.containsKey('message')) {
+          // Si la réponse contient une erreur
+          print('Erreur d\'authentification: ${response['error'] ?? response['message']}');
+          return null;
+        }
+        // Sinon, c'est probablement un objet utilisateur
+        return User.fromJson(response);
+      }
+      
+      print('Format de réponse non reconnu: $response');
+      return null;
+    } catch (e) {
+      print('Erreur de connexion: $e');
+      return null;
+    }
+  }
 }

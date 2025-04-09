@@ -2,6 +2,7 @@ package Services.EquipementServices.Classes.ReadPhones;
 
 import Models.PhonesModel;
 import Services.DatabaseServices.DatabaseConnection;
+import Services.EquipementServices.Interfaces.ReadInterfaces.ReadByIMEI;
 import Services.EquipementServices.Interfaces.ReadInterfaces.ReadInterface;
 
 import java.sql.Connection;
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ReadPhones implements ReadInterface {
+public class ReadPhones implements ReadInterface, ReadByIMEI {
     private PhonesModel phone;
 
     public ReadPhones(PhonesModel phone) {
@@ -18,38 +19,31 @@ public class ReadPhones implements ReadInterface {
     }
 
     @Override
-    public ArrayList<PhonesModel> read(Integer id) throws Exception {
-        ArrayList<PhonesModel> phones = new ArrayList<>();
-        String sql = "SELECT * FROM Agents WHERE Code = ?";
-
-        try (Connection connection = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pst = connection.prepareStatement(sql)) {
-            
-            pst.setString(1, phone.getIMEI());
-
-            // Exécution de la requête
-            try (ResultSet rsl = pst.executeQuery()) {
-                // Parcours des résultats et création des objets PhonesModel
-                while (rsl.next()) {
-                    PhonesModel phonesModel = new PhonesModel();
-                    phonesModel.setIMEI(rsl.getString("MEI"));
-                    phonesModel.setNom(rsl.getString("nom"));
-                    phonesModel.setModele(rsl.getString("Modele"));
-                    phonesModel.setMemoire_ROM(rsl.getInt("Memoire_ROM"));
-                    phonesModel.setMemoire_RAM(rsl.getInt("Memoire_RAM"));
-                    phonesModel.setNumero_serie(rsl.getString("Memoire_serie"));
-                    phonesModel.setIdPropretaire(rsl.getInt("IdPropiétaire"));
-                    phonesModel.setCouleur(rsl.getString("Couleur"));
-                    phonesModel.setEtat_Materiel(rsl.getString("Etat_Matériel"));
-
-                    phones.add(phonesModel); // Ajouter l'objet à la liste
-                }
-            }
+    public ResultSet read(Integer id) throws Exception {
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            String query = "SELECT * FROM Phones WHERE IdProprietaire = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            return pstmt.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("Erreur lors de la lecture des phones: " + e.getMessage());
+            if (conn != null) conn.close();
+            throw e;
         }
+    }
 
-        return phones;
+    public ResultSet getByIMEI() throws SQLException {
+        Connection conn = DatabaseConnection.getInstance().getConnection();
+        try {
+            String query = "SELECT * FROM Phones WHERE IMEI = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, phone.getIMEI());
+            // Note: La connexion sera fermée par l'appelant
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            // Fermer la connexion en cas d'erreur
+            if (conn != null) conn.close();
+            throw e;
+        }
     }
 }

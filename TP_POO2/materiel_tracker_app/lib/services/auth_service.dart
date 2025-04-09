@@ -11,14 +11,9 @@ class AuthService {
     try {
       final user = await UserService.login(email, password);
       if (user != null) {
-        print('User before save: ${user.toJson()}'); // Debug print
         await _saveUserToLocal(user);
         
         final currentUser = await getCurrentUser();
-        print('Raw current user: $currentUser'); // Debug print
-        print('Current user JSON: ${currentUser?.toJson()["id_user"]}'); // Debug print
-        print('Current user: ${currentUser?.id ?? "null mince"}');
-        print('Connexion réussie pour: ${user.email}');
         return true;
       }
       print('Échec de connexion: identifiants incorrects');
@@ -26,6 +21,20 @@ class AuthService {
     } catch (e) {
       print('Erreur de connexion: $e');
       return false;
+    }
+  }
+
+  static Future<User?> getUser(int id) async {
+    try {
+      final user = await UserService.getUser(id);
+      if (user != null) {
+        return user;
+      }
+      print('Échec de connexion: identifiants incorrects');
+      return null;
+    } catch (e) {
+      print('Erreur de connexion: $e');
+      return null;
     }
   }
   

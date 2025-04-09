@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../services/search_service.dart';
 import 'materiel_detail_screen.dart';
+import '../services/auth_service.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
   String? _errorMessage;
   dynamic _searchResult;
   String _searchType = 'imei'; // 'imei' ou 'mac'
+  dynamic _currentUser;
 
   @override
   void dispose() {
@@ -25,6 +27,16 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Future<void> _search() async {
     final query = _searchController.text.trim();
+    final user = await AuthService.getCurrentUser();
+    setState(() {
+      _currentUser = user;
+    });
+    if (user == null) {
+      setState(() {
+        _errorMessage = 'Utilisateur non connecté';
+      });
+      return;
+    }
     if (query.isEmpty) {
       setState(() {
         _errorMessage = 'Veuillez entrer un code IMEI ou une adresse MAC';
@@ -188,6 +200,9 @@ class _SearchScreenState extends State<SearchScreen> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => MaterielDetailScreen(
+                idProprietaire: materiel.idProprietaire,
+                id: _searchType == 'imei'? materiel.imei : materiel.addressMAC,
+                isHisPhone: _currentUser?.id == materiel.idProprietaire,
                 materielType: isPhone ? 'phone' : 'equipment',
                 materiel: materiel,
               ),

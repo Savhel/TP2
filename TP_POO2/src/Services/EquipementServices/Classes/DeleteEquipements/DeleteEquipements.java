@@ -6,7 +6,6 @@ import Services.EquipementServices.Interfaces.DeleteInterfaces.DeleteInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DeleteEquipements implements DeleteInterface {
@@ -18,23 +17,17 @@ public class DeleteEquipements implements DeleteInterface {
     }
 
     @Override
-    public String delete(Integer id) throws Exception {
-        String sql = "DELETE FROM Equipements where address_MAC = ?";
-        
-        try (Connection connection = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pst = connection.prepareStatement(sql)) {
-            
-            pst.setString(1, equipement.getAddress_MAC());
-            int rowsAffected = pst.executeUpdate();
-            
-            if (rowsAffected > 0) {
-                return (equipement.getNom() + " a été supprimé avec success");
-            } else {
-                return "Aucun équipement trouvé avec cette adresse MAC";
-            }
+    public boolean delete() throws Exception {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
+            String query = "DELETE FROM Equipements WHERE address_MAC = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, equipement.getAddress_MAC());
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Erreur lors de la suppression de l'équipement: " + e.getMessage());
+            return false;
         }
     }
 }

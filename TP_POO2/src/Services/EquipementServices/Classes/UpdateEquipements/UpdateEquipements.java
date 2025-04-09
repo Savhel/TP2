@@ -6,7 +6,6 @@ import Services.EquipementServices.Interfaces.UpdateInterfaces.UpdateInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UpdateEquipements implements UpdateInterface {
@@ -17,26 +16,27 @@ public class UpdateEquipements implements UpdateInterface {
     }
 
     @Override
-    public void UpdateMaterial(){
-        String requete="UPDATE Equipements SET IdProprietaire=?,Couleur=?,etat_Materiel=?,Nom=?,Marque=?,Modele=?,memoire_ROM=?,memoire_RAM=?,numero_serie=? WHERE address_MAC=?";
-        
-        try (Connection connection = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(requete)) {
-            
-            stmt.setString(10,e.getAddress_MAC());
-            stmt.setInt(1,e.getIdProprietaire());
-            stmt.setString(2,e.getCouleur());
-            stmt.setString(3,e.getEtat_Materiel());
-            stmt.setString(4,e.getNom());
-            stmt.setString(5,e.getMarque());
-            stmt.setString(6,e.getModele());
-            stmt.setFloat(7,e.getMemoire_ROM());
-            stmt.setFloat(8,e.getMemoire_RAM());
-            stmt.setString(9,e.getNumero_serie());
-            
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public boolean UpdateMaterial(){
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
+            String query = "UPDATE Equipements SET IdProprietaire = ?, etat_Materiel = ?, Couleur = ?, Nom = ?, Marque = ?, Modele = ?, memoire_ROM = ?, memoire_RAM = ?, numero_serie = ?, photoUrl = ? WHERE address_MAC = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, e.getIdProprietaire());
+            pstmt.setString(2, e.getEtat_Materiel());
+            pstmt.setString(3, e.getCouleur());
+            pstmt.setString(4, e.getNom());
+            pstmt.setString(5, e.getMarque());
+            pstmt.setString(6, e.getModele());
+            pstmt.setFloat(7, e.getMemoire_ROM());
+            pstmt.setFloat(8, e.getMemoire_RAM());
+            pstmt.setString(9, e.getNumero_serie());
+            pstmt.setString(10, e.getPhotoUrl());
+            pstmt.setString(11, e.getAddress_MAC());
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

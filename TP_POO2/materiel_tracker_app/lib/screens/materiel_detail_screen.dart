@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:materiel_tracker_app/services/auth_service.dart';
 import '../models/models.dart';
 import '../services/materiel_service.dart';
 import 'edit_materiel_screen.dart';
+import '../services/email_service.dart';
 
 class MaterielDetailScreen extends StatefulWidget {
   final String materielType; // 'phone' ou 'equipment'
   final dynamic materiel; // Phone ou Equipment
+  final int? userId;
+  final int? idProprietaire;
+  final bool isHisPhone ;
+  final String id;
 
   const MaterielDetailScreen({
     Key? key,
+    required this.id,
+    this.isHisPhone = false,
+    this.userId,
+    required this.idProprietaire,
     required this.materielType,
     required this.materiel,
   }) : super(key: key);
@@ -114,6 +124,68 @@ class _MaterielDetailScreenState extends State<MaterielDetailScreen> {
     }
   }
 
+Future<void> _signalerMateriel(int id) async {
+    // Afficher une boîte de dialogue de confirmation
+    final envoyer = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirmation d\'avoir trouvé !'),
+        content: Text(
+          'Êtes-vous sûr d\'avoir trouvé ce ${widget.materielType == 'phone' ? "téléphone" : "équipement"} ? Cette action est irréversible.'
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Non désolé'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('OUI', style: TextStyle(color: Color.fromARGB(255, 7, 255, 53))),
+          ),
+        ],
+      ),
+    ) ?? false;
+
+    if (!envoyer) return;
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      dynamic proprietaire = await AuthService.getUser(id);
+      print(proprietaire);
+      dynamic currentUser= await AuthService.getCurrentUser();
+      dynamic userName = proprietaire.nom;
+      dynamic userPhone = proprietaire.numtel;
+      dynamic currentUserName = currentUser.nom;
+      dynamic currentUserPhone = currentUser.numtel;
+      dynamic userMail = proprietaire.email;
+      print('je veux envoyer a $userName $userMail $userPhone je suis $currentUserName ');
+      final sender = EmailSender(
+          subject: "Notification sur votre appareil volé",
+          id: userPhone,
+          recipientEmail: userMail,
+        );
+      if (!mounted) return;
+      await sender.sendEmail('Salut Monsieur/madame $userName Nous espérons que vous allez bien! \n Votre appareil vient d\'etre touvé ! Contactez le $currentUserPhone pour plus d\'informations ');
+
+      if (!mounted) return;
+
+      // Afficher un message de succès et retourner à l'écran précédent
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Merci pour votre aide')),
+      );
+      Navigator.of(context).pop();
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Erreur lors de l\'operation: $e';
+        _isLoading = false;
+      });
+    }
+  }
+
   // Méthode pour modifier le matériel
   void _editMateriel() {
     Navigator.of(context).push(
@@ -148,16 +220,25 @@ class _MaterielDetailScreenState extends State<MaterielDetailScreen> {
       appBar: AppBar(
         title: Text(materiel.nom ?? 'Détail du matériel'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            tooltip: 'Modifier',
-            onPressed: _editMateriel,
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete),
-            tooltip: 'Supprimer',
-            onPressed: _deleteMateriel,
-          ),
+          if(widget.isHisPhone)...[
+            IconButton(
+              icon: const Icon(Icons.edit),
+              tooltip: 'Modifier',
+              onPressed: _editMateriel,
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete),
+              tooltip: 'Supprimer',
+              onPressed: _deleteMateriel,
+            ),
+          ],
+          if(!widget.isHisPhone)...[
+            IconButton(
+              icon: const Icon(Icons.telegram_outlined),
+              tooltip: 'Signaler',
+              onPressed: () => _signalerMateriel(widget.idProprietaire!),
+            ),
+          ],
         ],
       ),
       body: _isLoading
@@ -209,13 +290,15 @@ class _MaterielDetailScreenState extends State<MaterielDetailScreen> {
                         _buildInfoRow('Adresse MAC', (materiel as Equipment).addressMAC ?? 'Non spécifié'),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  _buildInfoCard(
-                    title: 'État actuel',
-                    children: [
-                      _buildStatusSelector(),
-                    ],
-                  ),
+                  if(widget.isHisPhone)...[
+                    const SizedBox(height: 16),
+                    _buildInfoCard(
+                      title: 'État actuel',
+                      children: [
+                        _buildStatusSelector(),
+                      ],
+                    ),
+                  ],
                   if (_errorMessage != null) ...[  
                     const SizedBox(height: 16),
                     Container(
@@ -291,8 +374,8 @@ class _MaterielDetailScreenState extends State<MaterielDetailScreen> {
           spacing: 8,
           children: [
             _buildStatusChip('normal', 'Normal'),
-            _buildStatusChip('volé', 'Volé'),
-            _buildStatusChip('retrouvé', 'Retrouvé'),
+            _buildStatusChip('vole', 'Volé'),
+            _buildStatusChip('retrouve', 'Retrouvé'),
           ],
         ),
       ],

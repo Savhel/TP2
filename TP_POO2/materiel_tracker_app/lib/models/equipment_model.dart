@@ -26,7 +26,7 @@ class Equipment extends Materiel {
       memoireROM: json['memoire_ROM']?.toInt(),
       memoireRAM: json['memoire_RAM']?.toInt(),
       numeroSerie: json['numero_serie'],
-      idProprietaire: json['IdProprietaire'],
+      idProprietaire: json['IdProprietaire']?.toString() == "null" ? null : int.parse(json['IdProprietaire'].toString()),
       couleur: json['Couleur'],
       etatMateriel: json['etat_Materiel'],
       photoUrl: json['photoUrl'],
