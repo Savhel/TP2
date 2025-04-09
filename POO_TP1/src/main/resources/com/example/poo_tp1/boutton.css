@@ -1,0 +1,59 @@
+.text-field-transparent {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 5px 0;
+    -fx-border-color: #3498db;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 0 0 5px 0;
+}
+
+.text-field-1 {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #3498db;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 0 0 2px 0;
+}
+
+.seConnecter {
+    -fx-background-color: rgba(0, 0, 255, 0.2);
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 20px;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+
+    -fx-background-insets: 0;
+    -fx-transition: all 0.3s ease;
+}
+
+.seConnecter:hover {
+    -fx-background-radius: 5px;
+    -fx-background-color: white !important;
+    -fx-text-fill: rgba(0, 0, 255, 0.2);
+    -fx-border-color: rgba(0, 0, 255, 0.2);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.5, 0, 1);
+}
+
+.seConnecter:pressed {
+    -fx-background-color: #f0f0f0 !important;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 1);
+}
+
+.seConnecter:focused {
+    -fx-border-color: rgba(0, 0, 255, 1);
+}
+
+.modal{
+    -fx-background-color: linear-gradient(to right,rgba(255, 0, 0, 0.8),rgba(0, 0, 255, 0.3));
+}
+
+.modalText{
+    -fx-text-fill: linear-gradient(to right, rgba(0, 0, 255, 0.3),rgba(255, 0, 0, 0.8));
+}
+
+.table{
+    -fx-text-fill: #3498db;
+}

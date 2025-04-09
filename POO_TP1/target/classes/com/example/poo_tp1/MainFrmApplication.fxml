@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.poo_tp1.MainFrmController">
+   <children>
+      <BorderPane fx:id="AjouterContactPage" prefHeight="610.0" prefWidth="600.0" visible="false">
+         <center>
+            <AnchorPane fx:id="Addcontact1" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="AddContactPage1" prefHeight="610.0" prefWidth="600.0" styleClass="modal" stylesheets="@boutton.css">
+                     <children>
+                        <ImageView fitHeight="149.0" fitWidth="197.0" layoutX="225.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/images/OIP2.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="AddNom" layoutX="20.0" layoutY="249.0" prefHeight="30.0" prefWidth="168.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <TextField fx:id="AddDateNaiss" layoutX="216.0" layoutY="357.0" prefHeight="30.0" prefWidth="168.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <TextField fx:id="AddNumero" layoutX="386.0" layoutY="249.0" prefHeight="30.0" prefWidth="168.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <TextField fx:id="AddMail" layoutX="20.0" layoutY="454.0" prefHeight="30.0" prefWidth="168.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <TextField fx:id="AddAdress" layoutX="385.0" layoutY="454.0" prefHeight="30.0" prefWidth="168.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Button fx:id="ValiderButton" layoutX="438.0" layoutY="514.0" mnemonicParsing="false" onAction="#AjouterContact" prefHeight="63.0" prefWidth="64.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="55.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="AnnulerButton" layoutX="45.0" layoutY="513.0" mnemonicParsing="false" onAction="#OnclickAnnulerButton" prefHeight="66.0" prefWidth="64.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="58.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/OIP__1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Label fx:id="AddCode" layoutX="268.0" layoutY="161.0" text="Code" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="73.0" layoutY="210.0" text="Nom" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="417.0" layoutY="210.0" text="Numero" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="186.0" layoutY="310.0" text="Date de naissance" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="70.0" layoutY="415.0" text="Email" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="420.0" layoutY="415.0" text="Adresse" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="AddContactPage2" prefHeight="610.0" prefWidth="600.0" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                     <children>
+                        <Label layoutX="57.0" layoutY="207.0" text="Qui voulez-vous  enregistrer ?">
+                           <font>
+                              <Font name="System Bold Italic" size="35.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AddEtudiant" layoutX="47.0" layoutY="334.0" mnemonicParsing="false" onAction="#SelectTypeContactEtudiant" prefHeight="60.0" prefWidth="146.0" styleClass="seConnecter" stylesheets="@boutton.css" text="Etudiant">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="AddEnseignant" layoutX="214.0" layoutY="334.0" mnemonicParsing="false" onAction="#SelectTypeContactEnseignant" prefHeight="60.0" prefWidth="174.0" styleClass="seConnecter" stylesheets="@boutton.css" text="Enseignant">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="AddAgent" layoutX="415.0" layoutY="334.0" mnemonicParsing="false" onAction="#SelectTypeContactAgent" prefHeight="52.0" prefWidth="135.0" styleClass="seConnecter" stylesheets="@boutton.css" text="Agent ">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="AnnulerButtonPageAddContact2" layoutX="270.0" layoutY="460.0" mnemonicParsing="false" onAction="#OnclickAnnulerButton" prefHeight="83.0" prefWidth="88.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="75.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/OIP__1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="AddContactPageEtudiantEnd" layoutX="-1.0" layoutY="-1.0" prefHeight="610.0" prefWidth="600.0" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                     <children>
+                        <Label layoutX="125.0" layoutY="265.0" text="Cycle" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AnnulerButtonEtudiantEnd" layoutX="84.0" layoutY="462.0" mnemonicParsing="false" onAction="#OnclickAnnulerButton" prefHeight="68.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/OIP__1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <ComboBox fx:id="ChoixCycle" layoutX="72.0" layoutY="299.0" prefWidth="150.0" promptText="choisir le cycle" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Label layoutX="458.0" layoutY="263.0" text="Niveau" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="ChoixNiveau" layoutX="400.0" layoutY="297.0" prefWidth="150.0" promptText="Choisir le niveau" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Label fx:id="displayNomAdd" layoutX="232.0" layoutY="78.0" text="Nom.code" textFill="#46c944">
+                           <font>
+                              <Font name="System Bold Italic" size="29.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AddButtonEtudiantEnd" layoutX="416.0" layoutY="462.0" mnemonicParsing="false" onAction="#AjouterEtudiant" prefHeight="44.0" prefWidth="118.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="AddContactPageEnseignantEnd" prefHeight="610.0" prefWidth="600.0" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                     <children>
+                        <Label layoutX="278.0" layoutY="270.0" text="Statut" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AnnulerButtonEtudiantEnd1" layoutX="90.0" layoutY="437.0" mnemonicParsing="false" onAction="#OnclickAnnulerButton" prefHeight="64.0" prefWidth="63.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="56.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/OIP__1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <ComboBox fx:id="ChoixStatut" layoutX="225.0" layoutY="304.0" prefWidth="150.0" promptText="Choisir son Statut" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Label layoutX="442.0" layoutY="265.0" text="Salaire" visible="false">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="displayNomAdd1" layoutX="232.0" layoutY="78.0" text="Nom.code" textFill="#46c944">
+                           <font>
+                              <Font name="System Bold Italic" size="29.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AddButtonEnseignantEnd" layoutX="406.0" layoutY="422.0" mnemonicParsing="false" onAction="#AjouterEnseignant" prefHeight="71.0" prefWidth="90.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="86.0" fitWidth="113.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <TextField fx:id="SalaireEnseignant" layoutX="384.0" layoutY="299.0" prefHeight="25.0" prefWidth="174.0" visible="false" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="AddContactPageAgentEnd" prefHeight="610.0" prefWidth="600.0" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                     <children>
+                        <Label fx:id="StatutAgent" layoutX="125.0" layoutY="265.0" text="Statut" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AnnulerButtonEtudiantEnd11" layoutX="88.0" layoutY="443.0" mnemonicParsing="false" onAction="#OnclickAnnulerButton" prefHeight="44.0" prefWidth="118.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="66.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/OIP__1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <ComboBox fx:id="ChoixStatutAgent" layoutX="72.0" layoutY="299.0" prefWidth="150.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Label layoutX="415.0" layoutY="266.0" text="Indice salaire" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="displayNomAdd2" layoutX="232.0" layoutY="78.0" text="Nom.code" textFill="#46c944">
+                           <font>
+                              <Font name="System Bold Italic" size="29.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="AddButtonAgentEnd" layoutX="415.0" layoutY="441.0" mnemonicParsing="false" onAction="#AjouterAgent" prefHeight="78.0" prefWidth="77.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="70.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <TextField fx:id="IndiceSalaireAgent" layoutX="384.0" layoutY="299.0" prefHeight="25.0" prefWidth="174.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <TextField fx:id="CategorieAgent" layoutX="64.0" layoutY="379.0" prefHeight="25.0" prefWidth="174.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Label layoutX="122.0" layoutY="345.0" text="Categorie" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="OccupationAgent" layoutX="371.0" layoutY="383.0" prefHeight="25.0" prefWidth="174.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                        <Label layoutX="414.0" layoutY="346.0" text="Occupation" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="271.0" layoutY="220.0" text="Salaire" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="SalaireAgent" layoutX="213.0" layoutY="254.0" prefHeight="25.0" prefWidth="174.0" promptText="2000000" styleClass="text-field-1" stylesheets="@boutton.css" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="mainFrmpage" prefHeight="610.0" prefWidth="600.0">
+         <top>
+            <AnchorPane prefHeight="184.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to top, #ff6b6b, rgba(0, 0, 255, 0.3));" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/images/photo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="26.0" layoutY="24.0" text="Conctact" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="46.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="359.0" layoutY="92.0" text="Manager" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="39.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="316.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #ff6b6b, rgba(0, 0, 255, 0.3));" stylesheets="@boutton.css" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="userName" layoutX="153.0" layoutY="144.0" prefHeight="32.0" prefWidth="294.0" promptText="username" style="-fx-background-color: transparent; -fx-border-color: white;" styleClass="text-field-transparent" stylesheets="@boutton.css" />
+                  <Label layoutX="259.0" layoutY="80.0" text="User" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="39.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="userPassword" layoutX="152.0" layoutY="247.0" prefHeight="32.0" prefWidth="294.0" promptText="* * * * * * * *" style="-fx-background-color: transparent; -fx-border-color: white;" styleClass="text-field-transparent" stylesheets="@boutton.css" />
+                  <Label layoutX="213.0" layoutY="191.0" text="Password" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="39.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="ButtonSeConnecter" layoutX="210.0" layoutY="311.0" mnemonicParsing="false" onAction="#Connexion" prefHeight="38.0" prefWidth="178.0" styleClass="seConnecter" stylesheets="@boutton.css" text="Se connecter">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="ChoosePage" prefHeight="610.0" prefWidth="600.0" visible="false">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to top,rgba(0, 0, 255, 0.3),rgba(255, 0, 0, 0.8));" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="284.0" fitWidth="290.0" layoutX="155.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/images/OIP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="149.0" prefWidth="600.0" style="-fx-border-radius: 0; -fx-background-color: linear-gradient(to top,rgba(255, 0, 0, 0.8),rgba(0, 0, 255, 0.3));" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="voirListeContact" layoutX="110.0" layoutY="62.0" mnemonicParsing="false" onAction="#SeeListContact" prefHeight="58.0" prefWidth="189.0" style="-fx-background-radius: 20; -fx-background-color: transparent;" styleClass="button1" stylesheets="@boutton.css">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/images/R.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="ajouterContact" layoutX="351.0" layoutY="62.0" mnemonicParsing="false" onAction="#SeeAddContact" prefHeight="60.0" prefWidth="58.0" style="-fx-background-radius: 20; -fx-background-color: transparent;" styleClass="button1" stylesheets="@boutton.css">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/images/OIP2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+      <BorderPane fx:id="ListePage" prefHeight="610.0" prefWidth="600.0" visible="false">
+         <center>
+            <AnchorPane prefHeight="454.0" prefWidth="600.0" styleClass="modal" stylesheets="@boutton.css" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="searchContact" layoutX="26.0" layoutY="70.0" prefHeight="34.0" prefWidth="546.0" promptText="Rechercher" style="-fx-border-radius: 30px;" styleClass="text-field-transparent" stylesheets="@boutton.css">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextField>
+                  <Label layoutX="139.0" layoutY="14.0" styleClass="modalText" stylesheets="@boutton.css" text="Liste des contacts">
+                     <font>
+                        <Font name="System Bold Italic" size="42.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TableView fx:id="listeContact" layoutX="26.0" layoutY="168.0" prefHeight="302.0" prefWidth="153.0" stylesheets="@boutton.css">
+                    <columns>
+                      <TableColumn fx:id="ColCode" minWidth="0.0" prefWidth="0.0" text="C1" />
+                        <TableColumn fx:id="ColNom" prefWidth="151.0" text="Noms" />
+                    </columns>
+                     <styleClass>
+                        <String fx:value="table" />
+                        <String fx:value="modal" />
+                     </styleClass>
+                  </TableView>
+                  <Button fx:id="AnnulerListeContact" layoutX="46.0" layoutY="513.0" mnemonicParsing="false" onAction="#OnclickAnnulerButton" prefHeight="60.0" prefWidth="79.0" style="-fx-background-radius: 20; -fx-background-color: transparent;" styleClass="button1" stylesheets="@boutton.css">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/images/OIP__1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="ActualiserButton" layoutX="28.0" layoutY="116.0" mnemonicParsing="false" onAction="#Actualiser" prefHeight="22.0" prefWidth="58.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/images/R1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="ajouterListeContact" layoutX="95.0" layoutY="109.0" mnemonicParsing="false" onAction="#SeeAddContact" prefHeight="34.0" prefWidth="59.0" style="-fx-background-radius: 20; -fx-background-color: transparent;" styleClass="button1" stylesheets="@boutton.css">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/images/OIP2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <AnchorPane fx:id="DisplayEtudiantPane" layoutX="188.0" layoutY="167.0" prefHeight="382.0" prefWidth="396.0" visible="false">
+                     <children>
+                        <Label fx:id="DisplayCode" layoutX="22.0" layoutY="36.0" prefHeight="42.0" prefWidth="373.0" style="-fx-font-weight: bold;" text="Label" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayNom" layoutX="101.0" layoutY="-2.0" prefHeight="42.0" prefWidth="288.0" style="-fx-font-weight: bold;" text="Label" textAlignment="CENTER" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayEmail" layoutX="24.0" layoutY="191.0" prefHeight="42.0" prefWidth="370.0" style="-fx-font-weight: bold;" text="Label" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayTel" layoutX="23.0" layoutY="71.0" prefHeight="42.0" prefWidth="370.0" style="-fx-font-weight: bold;" text="Label" textAlignment="CENTER" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayAdress" layoutX="24.0" layoutY="112.0" prefHeight="42.0" prefWidth="370.0" style="-fx-font-weight: bold;" text="Label" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayDateNaiss" layoutX="25.0" layoutY="151.0" prefHeight="42.0" prefWidth="367.0" style="-fx-font-weight: bold;" text="Label" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayCycle" layoutX="22.0" layoutY="232.0" prefHeight="42.0" prefWidth="372.0" style="-fx-font-weight: bold;" text="Label" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayNiveau" layoutX="22.0" layoutY="267.0" prefHeight="42.0" prefWidth="220.0" style="-fx-font-weight: bold;" text="Label" textFill="#fcfcfc">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Button fx:id="modifierEtudiantButton" layoutX="200.0" layoutY="313.0" mnemonicParsing="false" onAction="#ModifierEtudiant" prefHeight="62.0" prefWidth="63.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="supprimerEtudiantButton" layoutX="320.0" layoutY="312.0" mnemonicParsing="false" onAction="#checkSupprimer" prefHeight="50.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="53.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Trash.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="DisplayEnseignantPane" layoutX="191.0" layoutY="168.0" prefHeight="402.0" prefWidth="397.0" visible="false">
+                     <children>
+                        <Label fx:id="DisplayCode1" layoutX="11.0" layoutY="45.0" prefHeight="42.0" prefWidth="380.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayNom1" layoutX="129.0" layoutY="14.0" prefHeight="42.0" prefWidth="214.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayEmail1" layoutX="18.0" layoutY="208.0" prefHeight="42.0" prefWidth="375.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayTel1" layoutX="13.0" layoutY="84.0" prefHeight="42.0" prefWidth="383.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayAdress1" layoutX="14.0" layoutY="126.0" prefHeight="42.0" prefWidth="382.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayDateNaiss1" layoutX="16.0" layoutY="164.0" prefHeight="42.0" prefWidth="379.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayStatut" layoutX="20.0" layoutY="253.0" prefHeight="42.0" prefWidth="266.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplaySalaire" layoutX="198.0" layoutY="194.0" prefHeight="42.0" prefWidth="98.0" text="Label" visible="false" />
+                        <Button fx:id="modifierEnseignantButton" layoutX="210.0" layoutY="325.0" mnemonicParsing="false" onAction="#ModifierEnseignant" prefHeight="62.0" prefWidth="66.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="supprimerEnseignantButton" layoutX="332.0" layoutY="318.0" mnemonicParsing="false" onAction="#checkSupprimer" prefHeight="60.0" prefWidth="51.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="51.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Trash.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="DisplayAgentPane" layoutX="194.0" layoutY="112.0" prefHeight="486.0" prefWidth="396.0">
+                     <children>
+                        <Label fx:id="DisplayCode11" layoutX="12.0" layoutY="31.0" prefHeight="42.0" prefWidth="381.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayNom11" layoutX="83.0" layoutY="-1.0" prefHeight="30.0" prefWidth="230.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayEmail11" layoutX="13.0" layoutY="173.0" prefHeight="42.0" prefWidth="382.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayTel11" layoutX="13.0" layoutY="69.0" prefHeight="42.0" prefWidth="377.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayAdress11" layoutX="15.0" layoutY="100.0" prefHeight="42.0" prefWidth="382.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayDateNaiss11" layoutX="14.0" layoutY="138.0" prefHeight="42.0" prefWidth="381.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayStatutAgent" layoutX="14.0" layoutY="207.0" prefHeight="42.0" prefWidth="383.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayCategorie" layoutX="15.0" layoutY="250.0" prefHeight="42.0" prefWidth="381.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayIndiceSalaire" layoutX="15.0" layoutY="336.0" prefHeight="42.0" prefWidth="382.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplayOccupation" layoutX="14.0" layoutY="379.0" prefHeight="42.0" prefWidth="380.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label fx:id="DisplaySalaire11" layoutX="15.0" layoutY="293.0" prefHeight="42.0" prefWidth="382.0" text="Label" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="modifierAgentButton" layoutX="168.0" layoutY="418.0" mnemonicParsing="false" onAction="#ModifierAgent" prefHeight="58.0" prefWidth="62.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Pen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="supprimerAgentButton" layoutX="325.0" layoutY="409.0" mnemonicParsing="false" onAction="#checkSupprimer" prefHeight="62.0" prefWidth="54.0" style="-fx-background-color: transtarent;">
+                           <graphic>
+                              <ImageView fitHeight="51.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@assets/images/Trash.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="UpdateAgent" prefHeight="610.0" prefWidth="600.0" style="-fx-background-color: rgba(255, 0, 0, 0.8);" visible="false">
+                     <children>
+                        <AnchorPane fx:id="paneUpdateAgent" layoutX="102.0" layoutY="151.0" prefHeight="302.0" prefWidth="396.0" style="-fx-border-width: 2px; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                           <children>
+                              <Button fx:id="AnnulerUpdate" layoutX="11.0" layoutY="262.0" mnemonicParsing="false" onAction="#annulerModifierAgent" prefHeight="44.0" prefWidth="48.0" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/OIP__1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="ValiderUpdate" layoutX="332.0" layoutY="271.0" mnemonicParsing="false" onAction="#validerModifierAgent" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/Pen.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="UpdateCode" disable="true" layoutX="120.0" layoutY="20.0" promptText="Code" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNumero" layoutX="240.0" layoutY="47.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNom" layoutX="19.0" layoutY="47.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNaiss" layoutX="119.0" layoutY="89.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateCategorie" layoutX="237.0" layoutY="163.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateEmail" layoutX="237.0" layoutY="121.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateAdresse" layoutX="24.0" layoutY="121.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateIndiceSalaire" layoutX="237.0" layoutY="211.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateOccupation" layoutX="24.0" layoutY="212.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateSalaire" layoutX="130.0" layoutY="246.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <Label layoutX="62.0" layoutY="105.0" text="Adresse" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="172.0" layoutY="223.0" text="Salaire" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="59.0" layoutY="192.0" text="Occupation" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="247.0" layoutY="189.0" text="Indice de salaire" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="71.0" layoutY="144.0" text="Statut" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="275.0" layoutY="145.0" text="Catégorie" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="290.0" layoutY="102.0" text="Email" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="134.0" layoutY="71.0" text="Date de naissance" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="279.0" layoutY="33.0" text="Numéro" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="80.0" layoutY="33.0" text="Nom" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="177.0" layoutY="1.0" text="Code" textFill="#fcfcfc">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="UpdateChoix" layoutX="24.0" layoutY="164.0" prefWidth="150.0" promptText="choix du statut" styleClass="text-field-1" stylesheets="@boutton.css" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="paneUpdateEns" layoutX="102.0" layoutY="151.0" prefHeight="269.0" prefWidth="396.0" style="-fx-border-width: 2px; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                           <children>
+                              <Button fx:id="AnnulerUpdate1" layoutX="23.0" layoutY="207.0" mnemonicParsing="false" onAction="#annulerModifierEnseignant" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="37.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/OIP__1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button fx:id="ValiderUpdateEns" layoutX="319.0" layoutY="196.0" mnemonicParsing="false" onAction="#validerModifierEnseignant" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="42.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/Pen.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <TextField fx:id="UpdateCode1" disable="true" layoutX="120.0" layoutY="20.0" promptText="Code" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNumero1" layoutX="218.0" layoutY="47.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNom1" layoutX="19.0" layoutY="47.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNaiss1" layoutX="124.0" layoutY="102.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateEmail1" layoutX="223.0" layoutY="147.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateAdresse1" layoutX="24.0" layoutY="147.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <Label layoutX="65.0" layoutY="123.0" text="Adresse" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="179.0" layoutY="173.0" text="Statut" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="272.0" layoutY="123.0" text="Email" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="132.0" layoutY="76.0" text="Date de naissance" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="267.0" layoutY="33.0" text="Numéro" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="68.0" layoutY="33.0" text="Nom" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="169.0" layoutY="5.0" text="Code" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <ComboBox fx:id="UpdateStatutEns" layoutX="123.0" layoutY="188.0" prefWidth="150.0" promptText="choix du statut" styleClass="text-field-1" stylesheets="@boutton.css" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="paneUpdateEtudiant" layoutX="102.0" layoutY="175.0" prefHeight="261.0" prefWidth="396.0" style="-fx-border-width: 2px; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                           <children>
+                              <Button fx:id="AnnulerUpdate11" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#annulerModifierEtudiant" prefHeight="34.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="44.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/OIP__1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button fx:id="ValiderUpdate11" layoutX="314.0" layoutY="204.0" mnemonicParsing="false" onAction="#validerModifierEtudiant" prefHeight="44.0" prefWidth="52.0" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="51.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/Pen.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <TextField fx:id="UpdateCode11" disable="true" layoutX="120.0" layoutY="20.0" promptText="Code" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNumero11" layoutX="218.0" layoutY="47.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNom11" layoutX="19.0" layoutY="47.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateNaiss11" layoutX="111.0" layoutY="85.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateEmail11" layoutX="223.0" layoutY="121.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <TextField fx:id="UpdateAdresse11" layoutX="24.0" layoutY="121.0" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <Label layoutX="77.0" layoutY="107.0" text="Adresse" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="77.0" layoutY="149.0" text="Cycle" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="273.0" layoutY="145.0" text="Niveau" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="284.0" layoutY="107.0" text="Email" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="144.0" layoutY="71.0" text="Date de naissance" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="279.0" layoutY="33.0" text="Numéro" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="80.0" layoutY="33.0" text="Nom" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="172.0" layoutY="5.0" text="Code" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <ComboBox fx:id="UpdateCycle" layoutX="24.0" layoutY="164.0" prefWidth="150.0" promptText="choix du statut" styleClass="text-field-1" stylesheets="@boutton.css" />
+                              <ComboBox fx:id="UpdateNiveau" layoutX="218.0" layoutY="164.0" prefWidth="150.0" promptText="choix du niveau" styleClass="text-field-1" stylesheets="@boutton.css" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="paneUpdateEns1" layoutX="102.0" layoutY="167.0" prefHeight="269.0" prefWidth="396.0" style="-fx-border-width: 2px; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" styleClass="modal" stylesheets="@boutton.css" visible="false">
+                           <children>
+                              <Button fx:id="AnnulerUpdate12" layoutX="63.0" layoutY="107.0" mnemonicParsing="false" onAction="#annulerSupprimer" prefHeight="71.0" prefWidth="80.0" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="63.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/OIP__1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button fx:id="Supprimer" layoutX="265.0" layoutY="115.0" mnemonicParsing="false" onAction="#Supprimer" style="-fx-background-color: transparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="47.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/Trash.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
