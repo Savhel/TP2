@@ -105,9 +105,6 @@ class _EditMaterielScreenState extends State<EditMaterielScreen> {
     });
 
     try {
-      // TODO: Dans une implémentation réelle, il faudrait d'abord uploader l'image
-      // et récupérer l'URL avant de mettre à jour le matériel
-      // Pour l'instant, on conserve l'URL existante ou on simule une nouvelle URL
       final updatedImageUrl = _imageFile != null 
           ? 'https://example.com/images/updated_placeholder.jpg' 
           : _imageUrl;
