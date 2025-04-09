@@ -17,7 +17,7 @@ class _AddMaterielScreenState extends State<AddMaterielScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   String? _errorMessage;
-  String _materielType = 'phone'; // 'phone' ou 'equipment'
+  String _materielType = 'phone';
   File? _imageFile;
   String? _imageUrl;
 
@@ -68,9 +68,6 @@ class _AddMaterielScreenState extends State<AddMaterielScreen> {
     });
 
     try {
-      // TODO: Dans une implémentation réelle, il faudrait d'abord uploader l'image
-      // et récupérer l'URL avant de créer le matériel
-      // Pour l'instant, on simule une URL d'image
       _imageUrl = _imageFile != null ? 'https://example.com/images/placeholder.jpg' : null;
 
       if (_materielType == 'phone') {
