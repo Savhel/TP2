@@ -4,6 +4,7 @@ import 'services/auth_service.dart';
 import 'screens/auth_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
+import 'utils/animations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,10 +50,17 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const AuthCheckScreen(),
-      routes: {
-        '/auth': (context) => const AuthScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/search': (context) => const SearchScreen(),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case '/auth':
+            return FadePageRoute(page: const AuthScreen());
+          case '/home':
+            return SlidePageRoute(page: const HomeScreen());
+          case '/search':
+            return ScalePageRoute(page: const SearchScreen());
+          default:
+            return MaterialPageRoute(builder: (_) => const AuthScreen());
+        }
       },
     );
   }
@@ -106,7 +114,17 @@ class _AuthCheckScreenState extends State<AuthCheckScreen> {
               ),
             ),
             const SizedBox(height: 32),
-            const CircularProgressIndicator(),
+            TweenAnimationBuilder(
+              duration: const Duration(milliseconds: 800),
+              tween: Tween<double>(begin: 0, end: 1),
+              builder: (context, double value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: child,
+                );
+              },
+              child: const CircularProgressIndicator(),
+            ),
           ],
         ),
       ),

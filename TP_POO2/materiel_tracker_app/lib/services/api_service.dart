@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  // URL de base de l'API Java
-  static const String baseUrl = 'http://192.168.1.101:9000/api';
-  // Note: 10.0.2.2 est l'adresse IP spéciale qui permet à l'émulateur Android 
-  // d'accéder à l'hôte local (localhost) de la machine hôte
+  
+  static String serverIp = '192.168.1.101'; 
+  static int serverPort = 9000;
+  
+  // Construction dynamique de l'URL de base
+  static String get baseUrl => 'http://$serverIp:$serverPort/api';
 
   // Headers communs pour les requêtes
   static Map<String, String> headers = {

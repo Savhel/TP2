@@ -1,6 +1,6 @@
 {
-    "name": "materiel_tracker_app",
-    "short_name": "materiel_tracker_app",
+    "name": "testphone",
+    "short_name": "testphone",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

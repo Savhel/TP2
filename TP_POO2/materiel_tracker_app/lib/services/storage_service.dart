@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'api_service.dart';
 
 class StorageService {
   // URL de base pour le service de stockage
-  static const String baseUrl = '${ApiService.baseUrl}/storage';
+  static const String baseUrl = 'http://192.168.1.101:9000/api/storage';
 
   // Méthode pour télécharger une image
   static Future<String> uploadImage(File imageFile) async {

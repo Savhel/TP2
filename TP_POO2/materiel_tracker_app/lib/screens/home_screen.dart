@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:materiel_tracker_app/utils/animations.dart';
 import '../models/models.dart';
 import '../services/auth_service.dart';
 import '../services/materiel_service.dart';
 import 'materiel_detail_screen.dart';
 import 'add_materiel_screen.dart';
 import 'search_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -167,8 +169,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       itemBuilder: (context, index) {
         final materiel = materiels[index];
         final statusColor = _getStatusColor(materiel.etatMateriel);
+        
+        return AnimatedListItem(
+          index: index,
+          child:
 
-        return Card(
+        Card(
           margin: const EdgeInsets.symmetric(vertical: 8),
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -267,6 +273,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               ],
             ),
           ),
+        ),
         );
       },
     );
